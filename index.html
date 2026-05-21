@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SENAI • Suspensão e Direção</title>
+
+<style>/* =========================
+MODAL DAS IMAGENS
+========================= */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    z-index:2000;
+
+    left:0;
+    top:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.9);
+
+    justify-content:center;
+    align-items:center;
+
+    animation:fade 0.3s;
+
+}
+
+.modal-img{
+
+    max-width:90%;
+    max-height:85%;
+
+    border-radius:20px;
+
+    box-shadow:0 0 40px rgba(255,0,0,0.4);
+
+    animation:zoom 0.3s;
+
+}
+
+.fechar{
+
+    position:absolute;
+
+    top:20px;
+    right:40px;
+
+    font-size:3rem;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+/* EFEITO AO PASSAR O MOUSE */
+
+.card img{
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+.card img:hover{
+
+    transform:scale(1.03);
+
+}
+
+/* ANIMAÇÕES */
+
+@keyframes zoom{
+
+    from{
+
+        transform:scale(0.7);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#11183b;;
+    color:rgb(240, 234, 234);
+    overflow-x:hidden;
+}
+
+/* HEADER */
+
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:1000;
+    padding:20px;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(0,255,255,0.2);
+}
+
+nav{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:2rem;
+    color:#ff0000;
+    font-weight:bold;
+    text-shadow:0 0 15px #00ffff;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#00ffff;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:120px 20px 40px;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),
+    url('senailogo.jpg');
+
+    background-size:cover;
+    background-position:center;
+}
+
+.hero-box{
+    max-width:1000px;
+    padding:60px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+}
+
+.hero h1{
+    font-size:4rem;
+    color:#00ffff;
+    margin-bottom:25px;
+}
+
+.hero p{
+    font-size:1.2rem;
+    line-height:1.9;
+}
+
+/* SEÇÕES */
+
+section{
+    padding:90px 20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    font-size:3rem;
+    color:#00ffff;
+    margin-bottom:50px;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+/* CARDS */
+
+.card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:25px;
+    overflow:hidden;
+    transition:0.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 30px rgba(0,255,255,0.2);
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:25px;
+}
+
+.card h2{
+    color:#00ffff;
+    margin-bottom:20px;
+}
+
+.card p{
+    line-height:1.8;
+}
+
+/* INFO */
+
+.info-box{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:25px;
+    padding:35px;
+    margin-top:40px;
+}
+
+.info-box h2{
+    color:#00ffff;
+    margin-bottom:20px;
+}
+
+.info-box p,
+.info-box li{
+    line-height:1.9;
+}
+
+.info-box ul{
+    padding-left:20px;
+}
+
+/* CHECKLIST */
+
+.checklist-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.check-item{
+    padding:25px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+/* FOOTER */
+
+footer{
+    padding:40px;
+    text-align:center;
+    border-top:1px solid rgba(0,255,255,0.2);
+    margin-top:50px;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:2.5rem;
+    }
+
+    nav ul{
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+
+<nav>
+
+<div class="logo">
+SENAI seminario
+</div>
+
+<ul>
+<li><a href="#suspensao">Suspensão</a></li>
+<li><a href="#direcao">Direção</a></li>
+<li><a href="#pneus">Pneus</a></li>
+<li><a href="#checklist">Checklist</a></li>
+</ul>
+
+</nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-box">
+
+<h1>
+INSPEÇÃO NOS SISTEMAS DE SUSPENSÃO E DIREÇÃO
+</h1>
+
+<p>
+A suspensão e a direção são fundamentais para a segurança,
+estabilidade e conforto do veículo. A manutenção preventiva
+reduz falhas mecânicas e aumenta a vida útil dos componentes.
+</p>
+
+</div>
+
+</section>
+
+<!-- SUSPENSÃO -->
+
+<section id="suspensao">
+
+<div class="container">
+
+<h1 class="section-title">
+Sistema de Suspensão
+</h1>
+
+<div class="grid">
+
+<!-- CARD 1 -->
+
+<div class="card">
+
+<img src="pnj.jpg">
+
+<div class="card-content">
+
+<h2>O que é a suspensão?</h2>
+
+<p>
+A suspensão absorve impactos e mantém os pneus em contato
+com o solo, garantindo estabilidade e conforto.
+</p>
+
+</div>
+
+</div>
+
+<!-- CARD 2 -->
+
+<div class="card">
+
+<img src="pnj2.avif">
+
+<div class="card-content">
+
+<h2>Amortecedores</h2>
+
+<p>
+Controlam o movimento das molas e evitam oscilações excessivas
+durante a condução.
+</p>
+
+</div>
+
+</div>
+
+<!-- CARD 3 -->
+
+<div class="card">
+
+<img src="pnj3.png">
+
+<div class="card-content">
+
+<h2>Molas e Buchas</h2>
+
+<p>
+As molas absorvem impactos e as buchas reduzem vibrações
+e ruídos entre os componentes.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="info-box">
+
+<h2>Problemas comuns na suspensão</h2>
+
+<ul>
+
+<li>Vazamento nos amortecedores;</li>
+<li>Ruídos metálicos;</li>
+<li>Desgaste irregular dos pneus;</li>
+<li>Instabilidade em curvas;</li>
+<li>Batidas secas;</li>
+<li>Desgaste das buchas.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- DIREÇÃO -->
+
+<section id="direcao">
+
+<div class="container">
+
+<h1 class="section-title">
+Sistema de Direção
+</h1>
+
+<div class="grid">
+
+<!-- CARD 1 -->
+
+<div class="card">
+
+<img src="pnj4.png">
+
+<div class="card-content">
+
+<h2>Caixa de Direção</h2>
+
+<p>
+Transforma o movimento do volante em movimento lateral nas rodas.
+</p>
+
+</div>
+
+</div>
+
+<!-- CARD 2 -->
+
+<div class="card">
+
+<img src="pnj5.png">
+
+<div class="card-content">
+
+<h2>Barra Axial</h2>
+
+<p>
+Liga a caixa de direção aos terminais,
+transmitindo movimento para as rodas.
+</p>
+
+</div>
+
+</div>
+
+<!-- CARD 3 -->
+
+<div class="card">
+
+<img src="terminais.png">
+
+<div class="card-content">
+
+<h2>Terminais</h2>
+
+<p>
+Permitem movimentos precisos nas curvas e manobras do veículo.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="info-box">
+
+<h2>Problemas comuns na direção</h2>
+
+<ul>
+
+<li>Folga no volante;</li>
+<li>Direção pesada;</li>
+<li>Vibração;</li>
+<li>Desalinhamento;</li>
+<li>Ruídos ao virar;</li>
+<li>Desgaste irregular dos pneus.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PNEUS -->
+
+<section id="pneus">
+
+<div class="container">
+
+<h1 class="section-title">
+Pneus e Alinhamento
+</h1>
+
+<div class="grid">
+
+<!-- CARD 1 -->
+
+<div class="card">
+
+<img src="pnj7.jpg">
+
+<div class="card-content">
+
+<h2>Pneus</h2>
+
+<p>
+Garantem aderência, estabilidade e segurança durante a condução.
+</p>
+
+</div>
+
+</div>
+
+<!-- CARD 2 -->
+
+<div class="card">
+
+<img src="pnj8.png">
+
+<div class="card-content">
+
+<h2>Balanceamento</h2>
+
+<p>
+Reduz vibrações e melhora o conforto ao dirigir.
+</p>
+
+</div>
+
+</div>
+
+<!-- CARD 3 -->
+
+<div class="card">
+
+<img src="pnj9.png">
+
+<div class="card-content">
+
+<h2>Segurança</h2>
+
+<p>
+A manutenção preventiva reduz riscos e aumenta
+o controle do veículo.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="info-box">
+
+<h2>Importância do alinhamento</h2>
+
+<p>
+
+O alinhamento mantém as rodas corretamente posicionadas,
+melhorando:
+
+</p>
+
+<ul>
+
+<li>Estabilidade;</li>
+<li>Segurança;</li>
+<li>Durabilidade dos pneus;</li>
+<li>Conforto;</li>
+<li>Economia de combustível.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CHECKLIST -->
+
+<section id="checklist">
+
+<div class="container">
+
+<h1 class="section-title">
+Checklist Técnico
+</h1>
+
+<div class="checklist-grid">
+
+<div class="check-item">
+✔ Verificar amortecedores
+</div>
+
+<div class="check-item">
+✔ Conferir buchas
+</div>
+
+<div class="check-item">
+✔ Avaliar pneus
+</div>
+
+<div class="check-item">
+✔ Verificar alinhamento
+</div>
+
+<div class="check-item">
+✔ Inspecionar terminais
+</div>
+
+<div class="check-item">
+✔ Conferir barra axial
+</div>
+
+<div class="check-item">
+✔ Verificar folgas
+</div>
+
+<div class="check-item">
+✔ Avaliar estabilidade
+</div>
+
+<div class="check-item">
+✔ Conferir ruídos
+</div>
+
+<div class="check-item">
+✔ Inspecionar direção
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- MANUTENÇÃO -->
+
+<section>
+
+<div class="container">
+
+<h1 class="section-title">
+Importância da Manutenção Preventiva
+</h1>
+
+<div class="info-box">
+
+<p>
+
+A manutenção preventiva reduz falhas mecânicas,
+evita acidentes e aumenta a durabilidade dos componentes.
+
+</p>
+
+<br>
+
+<p>
+
+A falta de manutenção pode causar:
+
+</p>
+
+<ul>
+
+<li>Perda de estabilidade;</li>
+<li>Aumento da distância de frenagem;</li>
+<li>Desgaste prematuro;</li>
+<li>Perda de controle do veículo;</li>
+<li>Acidentes graves.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+Projeto SENAI • Sistemas de Suspensão e Direção • 2026
+</p>
+
+</footer>
+<!-- MODAL DAS IMAGENS -->
+
+<div id="modal" class="modal">
+
+    <span class="fechar" onclick="fecharModal()">
+        &times;
+    </span>
+
+    <img class="modal-img" id="imagemModal">
+
+<<script>
+
+/* =========================
+ABRIR IMAGEM
+========================= */
+
+const imagens =
+document.querySelectorAll('.card img');
+
+const modal =
+document.getElementById('modal');
+
+const imagemModal =
+document.getElementById('imagemModal');
+
+imagens.forEach(img => {
+
+    img.addEventListener('click', () => {
+
+        modal.style.display = 'flex';
+
+        imagemModal.src = img.src;
+
+    });
+
+});
+
+/* =========================
+FECHAR MODAL
+========================= */
+
+function fecharModal(){
+
+    modal.style.display = 'none';
+
+}
+
+/* FECHAR CLICANDO FORA */
+
+modal.addEventListener('click', (e) => {
+
+    if(e.target === modal){
+
+        fecharModal();
+
+    }
+
+});
+
+</script></body>
+</html>
